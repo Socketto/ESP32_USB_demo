@@ -2,3 +2,15 @@
 *.bak
 *.rej
 *fp-info-cache
+
+# Local editor history and KiCad session files
+.history/
+*.kicad_prl
+*.lck
+_autosave-*
+*.kicad_pcb-bak
+*.kicad_sch-bak
+
+# Regenerable fabrication outputs; keep jlcpcb/project.db and documentation images
+/board/jlcpcb/gerber/
+/board/jlcpcb/production_files/
