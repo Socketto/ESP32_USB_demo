@@ -14,3 +14,5 @@ _autosave-*
 # Regenerable fabrication outputs; keep jlcpcb/project.db and documentation images
 /board/jlcpcb/gerber/
 /board/jlcpcb/production_files/
+/board_cp2102n/jlcpcb/gerber/
+/board_cp2102n/jlcpcb/production_files/
