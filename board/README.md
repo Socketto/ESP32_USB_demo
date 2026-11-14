@@ -10,7 +10,7 @@ regulator, and a TFT SPI connector.
 > manufacturing issues before fabrication.
 >
 > **Connect either the external programmer or Serial1 USB, never both.**
-> During programming, the programmer supplies regulated 3.3 V through J4.
+> During programming, the programmer supplies regulated 3.3 V through J2.
 > Disconnect the programmer completely before connecting Serial1 USB.
 > UART signals must use 3.3 V logic, never 5 V or RS-232 voltages.
 
@@ -24,10 +24,10 @@ regulator, and a TFT SPI connector.
 | --- | --- |
 | Microcontroller | U1, ESP32-WROOM-32E-N4, Wi-Fi/Bluetooth and 4 MB flash |
 | Application USB-C | Serial1 and U2 CH340C, connected to ESP32 UART2; R12/R13 are the USB-C CC pull-downs |
-| External programming | J4 exposes UART0, EN/reset, GPIO0/BOOT, ground and the common +3V3 rail |
-| Manual boot/reset | Use J4 pin 6 (GPIO0), pin 5 (EN) and pin 2 (GND); no separate BOOT/RESET headers |
+| External programming | J2 exposes UART0, EN/reset, GPIO0/BOOT, ground and the common +3V3 rail |
+| Manual boot/reset | Use J2 pin 6 (GPIO0), pin 5 (EN) and pin 2 (GND); no separate BOOT/RESET headers |
 | Boot/reset bias | R5/R6, 10 kOhm EN/GPIO0 pull-ups; C6, 1 uF EN-to-ground reset timing |
-| Power | U3 USB regulator output and J4 pin 1 share +3V3 directly; no source selector or reverse-current isolation |
+| Power | U3 USB regulator output and J2 pin 1 share +3V3 directly; no source selector or reverse-current isolation |
 | Display | J1, 8-pin TFT SPI header |
 | Indicators and inputs | D1 RGB LED, IN1 push button, TH1 10 kOhm B3950 NTC |
 | Configuration | DA1 solder jumper |
@@ -46,11 +46,11 @@ JLCPCB quotations.
 
 ## External programming
 
-J4 uses a six-pin, through-hole, 2.54 mm vertical header. The table gives
+J2 uses a six-pin, through-hole, 2.54 mm vertical header. The table gives
 **KiCad pad numbers**, not an assumed left-to-right connector view; pad 1
 is square. Board labels TX/RX refer to the ESP32, not the adapter.
 
-| J4 pin | Signal | External adapter connection |
+| J2 pin | Signal | External adapter connection |
 | --- | --- | --- |
 | 1 | +3V3, common board rail | Programmer's regulated 3.3 V output; Serial1 USB must be disconnected |
 | 2 | GND | Adapter GND |
@@ -59,12 +59,12 @@ is square. Board labels TX/RX refer to the ESP32, not the adapter.
 | 5 | ESP_EN, reset | Briefly connect to pin 2 (GND), then release to reset |
 | 6 | ESP_BOOT, GPIO0 | Connect to pin 2 (GND) during reset to enter download mode |
 
-J4 pin 1, U3's output and the board loads are directly connected to the same
+J2 pin 1, U3's output and the board loads are directly connected to the same
 `+3V3` rail. No power-selection jumper is required. This arrangement assumes
 physically exclusive connections: unplug Serial1 USB for programming, then
 disconnect the programmer completely before using Serial1 USB.
 
-BOOT and RESET are operated directly through J4; separate BOOT1/RST1 headers
+BOOT and RESET are operated directly through J2; separate BOOT1/RST1 headers
 are not fitted. Use temporary leads to GND as described below; do not keep EN
 grounded during flashing or normal operation.
 R5/R6 remain necessary even without auto-reset: they establish the normal
@@ -73,13 +73,13 @@ high levels of EN and GPIO0. C6 remains connected between EN and GND.
 ### Manual flashing sequence
 
 1. Make sure Serial1 USB is disconnected and all power is off.
-2. Connect a regulated **3.3 V supply** to J4 pin 1 and GND to pin 2.
+2. Connect a regulated **3.3 V supply** to J2 pin 1 and GND to pin 2.
    The supply must support the ESP32's current peaks and other board loads;
    many USB-to-UART adapter 3.3 V outputs are not rated for this load.
    Connect a 3.3 V logic USB-to-UART adapter's GND, RX and TX as shown above.
    Use a common ground. Do not connect Serial1 USB while the programmer is connected.
-3. Connect J4 pin 6 to pin 2 (GND) to pull GPIO0 low.
-4. Briefly connect J4 pin 5 to GND, then release it while keeping GPIO0 low. The ESP32
+3. Connect J2 pin 6 to pin 2 (GND) to pull GPIO0 low.
+4. Briefly connect J2 pin 5 to GND, then release it while keeping GPIO0 low. The ESP32
    enters its ROM serial download mode when EN rises.
 5. Select the **external adapter's** serial port in `esptool` or the IDE,
    not Serial1/U2. Use manual boot/reset handling rather than expecting an
@@ -87,7 +87,7 @@ high levels of EN and GPIO0. C6 remains connected between EN and GND.
 6. After flashing, release GPIO0 and disconnect the programmer and any external
    supply completely. Connect Serial1 USB to run the application.
 
-For normal USB operation, leave J4 GPIO0 and EN released.
+For normal USB operation, leave J2 GPIO0 and EN released.
 EN and GPIO0 are exposed
 for a suitable external programming circuit, but **do not directly wire
 adapter DTR/RTS to them** without a correctly designed ESP32 reset circuit.
@@ -216,9 +216,9 @@ for current requirements and interface changes.
 | C5 | CL31A226KAHNNNE | [C12891](https://jlcpcb.com/partdetail/C12891) | Basic, nonpolar 22 uF / 25 V X5R, 1206 |
 | R12, R13 | 0603WAF5101T5E | [C23186](https://jlcpcb.com/partdetail/C23186) | Basic, 5.1 kOhm 1%, USB CC pull-downs |
 | Serial1 | HC-TYPE-C-16P-01A | [C2894897](https://jlcpcb.com/partdetail/C2894897) | HCTL USB-C, matching footprint |
-| J1, J4 | Standard 2.54 mm pin headers | Unassigned | Source and assemble manually |
+| J1, J2 | Standard 2.54 mm pin headers | Unassigned | Source and assemble manually |
 
-J4 remains in the schematic and PCB but is **excluded from both BOM and CPL**
+J2 remains in the schematic and PCB but is **excluded from both BOM and CPL**
 because it is manually assembled and has no assigned LCSC part. This prevents
 JLCPCB reporting a BOM designator missing from the CPL. Source manual headers
 separately, or deliberately select compatible catalog parts and a supported

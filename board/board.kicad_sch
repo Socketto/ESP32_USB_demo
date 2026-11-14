@@ -5852,7 +5852,7 @@
 			(embedded_fonts no)
 		)
 	)
-	(text "Serial1 USB: application UART2 only.\nProgramming uses external J4 UART0."
+	(text "Serial1 USB: application UART2 only.\nProgramming uses external J2 UART0."
 		(exclude_from_sim no)
 		(at 26.67 151.13 0)
 		(effects
@@ -5863,7 +5863,7 @@
 		)
 		(uuid "0120aab3-df3a-4b3b-bdba-a57768f947e7")
 	)
-	(text "J4: 1=+3V3, 2=GND, 3=ESP TXD0, 4=ESP RXD0, 5=EN, 6=GPIO0.\nProgramming: Serial1 USB disconnected; programmer powers J4 pin1 at regulated 3.3 V.\nNormal use: disconnect the programmer completely, then connect Serial1 USB.\nU3 OUT and J4 pin1 share +3V3 directly; no reverse-current isolation.\nAdapter TX -> RXD0, RX <- TXD0; common GND; 3.3 V logic only."
+	(text "J2: 1=+3V3, 2=GND, 3=ESP TXD0, 4=ESP RXD0, 5=EN, 6=GPIO0.\nProgramming: Serial1 USB disconnected; programmer powers J2 pin1 at regulated 3.3 V.\nNormal use: disconnect the programmer completely, then connect Serial1 USB.\nU3 OUT and J2 pin1 share +3V3 directly; no reverse-current isolation.\nAdapter TX -> RXD0, RX <- TXD0; common GND; 3.3 V logic only."
 		(exclude_from_sim no)
 		(at 238.76 55 0)
 		(effects
@@ -5896,7 +5896,7 @@
 		)
 		(uuid "9d38b3f0-ec4c-4b10-815b-94d8668bc93b")
 	)
-	(text "Manual download via J4: connect pin6 (GPIO0) to pin2 (GND).\nBriefly connect pin5 (EN) to GND, then release EN with GPIO0 still low.\nFlash via UART0; release GPIO0 and pulse EN again for normal boot.\nR5/R6 pull-ups and C6 (1uF EN-to-GND) provide bias and reset timing.\nNo on-board DTR/RTS auto-reset circuit."
+	(text "Manual download via J2: connect pin6 (GPIO0) to pin2 (GND).\nBriefly connect pin5 (EN) to GND, then release EN with GPIO0 still low.\nFlash via UART0; release GPIO0 and pulse EN again for normal boot.\nR5/R6 pull-ups and C6 (1uF EN-to-GND) provide bias and reset timing.\nNo on-board DTR/RTS auto-reset circuit."
 		(exclude_from_sim no)
 		(at 238.76 209.55 0)
 		(effects
@@ -12621,9 +12621,9 @@
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
-		(in_pos_files yes)
+		(in_pos_files no)
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dba0c515-2ac4-4931-997c-1da12a5ec494")
